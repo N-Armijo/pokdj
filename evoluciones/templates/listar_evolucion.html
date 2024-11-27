@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Evoluciones{% endblock %}
+{% block content %}
+<div class="col-6 mx-auto">
+    <h3>Lista de Evoluciones</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Pokémon Base</th>
+                <th>Pokémon Evolucionado</th>
+                <th>Nivel Necesario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evolucion in evoluciones %}
+            <tr>
+                <td>{{ evolucion.pokemon_base }}</td>
+                <td>{{ evolucion.pokemon_evolucion.nombre }}</td>
+                <td>{{ evolucion.nivel_necesario }}</td>
+                <td>
+                    <a href="{% url 'eliminar_evolucion' evolucion.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                    <a href="{% url 'editar_evolucion' evolucion.id %}" class="btn btn-sm btn-warning">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'crear_evolucion' %}" class="btn btn-success">Agregar Evolución</a>
+</div>
+{% endblock %}

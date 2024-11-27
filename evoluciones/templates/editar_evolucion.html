@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Editar Evolución{% endblock %}
+{% block content %}
+<h1>Editar Evolución</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{% url 'listar_evolucion' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

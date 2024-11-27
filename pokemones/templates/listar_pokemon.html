@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Pokémon{% endblock %} 
+{% block content %}
+<h3>Lista de Pokémon</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Nivel</th>
+      <th>Tipo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pokemon in page_obj %}
+    <tr>
+      <td>{{ pokemon.nombre }}</td>
+      <td>{{ pokemon.nivel }}</td>
+      <td>{{ pokemon.tipo.nombre }}</td>
+      <td>
+        <a
+          href="{% url 'editar_pokemon' pokemon.id %}"
+          class="btn btn-sm btn-primary"
+          >Editar</a
+        >
+        <a
+          href="{% url 'eliminar_pokemon' pokemon.id %}"
+          class="btn btn-sm btn-danger"
+          >Eliminar</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="d-flex justify-content-center">
+  {% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-link me-2"
+    >Anterior</a
+  >
+  {% endif %}
+  <span
+    >Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span
+  >
+  {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}" class="btn btn-link ms-2"
+    >Siguiente</a
+  >
+  {% endif %}
+</div>
+<a href="{% url 'crear_pokemon' %}" class="btn btn-success">Agregar Pokémon</a>
+{% endblock %}

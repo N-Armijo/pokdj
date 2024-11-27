@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Tipos{% endblock %}
+{% block content %}
+    <div class="col-6 mx-auto">
+        <h3 class="my-3">Lista de Tipos</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tipo in tipos %}
+                <tr>
+                    <td>{{ tipo.nombre }}</td>
+                    <td>
+                        <a href="{% url 'editar_tipo' tipo.id %}" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="{% url 'eliminar_tipo' tipo.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'crear_tipo' %}" class="btn btn-success">Agregar Tipo</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Crear Pokémon{% endblock %}
+{% block content %}
+    <div class="col-6 mx-auto">
+        <h3>Crear Pokémon</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a href="{% url 'crear_tipo' %}" class="d-block mb-2">Agregar Tipo</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{% url 'listar_pokemon' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Página Principal{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Lista de Pokémon</h2>
+
+    {% if not user_authenticated %}
+        <div class="alert alert-info" role="alert">
+            Para agregar o gestionar Pokémon, inicia sesión.
+        </div>
+    {% endif %}
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Nivel</th>
+                <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pokemon in page_obj %}
+                <tr>
+                    <td>{{ pokemon.nombre }}</td>
+                    <td>{{ pokemon.nivel }}</td>
+                    <td>
+                        {% if pokemon.tipo %}
+                            {{ pokemon.tipo.nombre }}
+                        {% else %}
+                            Sin Tipo
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination mt-3">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-link me-2">Anterior</a>
+        {% endif %}
+        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-link ms-2">Siguiente</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

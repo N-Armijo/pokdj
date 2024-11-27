@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Crear Evolución{% endblock %}
+{% block content %}
+<div class="col-6 mx-auto">
+    <h3 class="mb-2">Crear Evolución</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ field }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <a href="{% url 'crear_pokemon' %}" class="d-block mb-2">Agregar Pokemon de evolución</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'listar_evolucion' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Editar Tipo{% endblock %}
+{% block content %}
+<div class="col-6 mx-auto">
+    <h3 class="my-3">Editar Tipo</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{% url 'listar_tipo' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
